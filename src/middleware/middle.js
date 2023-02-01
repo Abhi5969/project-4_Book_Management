@@ -22,9 +22,13 @@ const authentication = async function (req, res, next) {
 
 const authForCreation = async function (req, res, next) {
   try {
-    if(!req.body.userId) return res.status(400).send({message:"user id is not present"})
-    if(!mongoose.Types.ObjectId.isValid(req.body.userId)) return res.status(400).send({message:"user id is not valid"})
-    if (req.decode.userId != req.body.userId)
+    let getData = req.body.data
+    let data = (JSON.parse(getData)) //Parse it
+    console.log(data.userId)
+    let ID= data.userId
+    if(!ID) return res.status(400).send({message:"user id is not present"})
+    if(!mongoose.Types.ObjectId.isValid(ID)) return res.status(400).send({message:"user id is not valid"})
+    if (req.decode.userId != ID)
       return res.status(403).send({ message: "you are not authorised" });
 
     next();

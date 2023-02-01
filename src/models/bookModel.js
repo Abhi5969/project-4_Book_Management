@@ -8,6 +8,10 @@ title:{
     unique:true,
     trim:true
 },
+bookCover:{
+    type:String,
+    trim:true
+},
 excerpt:{
     type:String,
     required:true,
