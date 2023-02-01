@@ -9,7 +9,9 @@ const bookJoi = Joi.object({
       excerpt: Joi.string().required(),
 
       ISBN: Joi.string().trim().required().regex(/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/).message("please enter valid ISBN"),
-
+// ^(?:ISBN(?:-1[03])?:?●)?(?=[0-9X]{10}$|(?=(?:[0-9]+[-●]){3})↵
+// [-●0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[-●]){4})[-●0-9]{17}$)↵
+// (?:97[89][-●]?)?[0-9]{1,5}[-●]?[0-9]+[-●]?[0-9]+[-●]?[0-9X]$
       userId:Joi.required(),
 
       category:Joi.string().required(),
