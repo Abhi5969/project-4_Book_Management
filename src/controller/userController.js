@@ -11,10 +11,10 @@ const createUser = async function (req, res) {
 
         if (Object.keys(data).length == 0)return res.status(400).send({ status: false, msg: "please send some data" });
 
-	    let one=0
-	    const validation = await userJOI.validateAsync(data).then(()=>true).catch((err)=>{one=err.message; return null})
+	    let error=0
+	    const validation = await userJOI.validateAsync(data).then(()=>true).catch((err)=>{error=err.message; return null})
 	
-	    if(!validation) return res.status(400).send({status :false,message:`${one}`})
+	    if(!validation) return res.status(400).send({status :false,message:`${error}`})
 
 
 	    let isExisting = await userModel.findOne({ $or: [{ email: data.email.trim() }, { phone: data.phone.trim() }] })           
@@ -43,10 +43,10 @@ const loginUser = async function (req, res) {
 
     if (Object.keys(data).length == 0)return res.status(400).send({ status: false, msg: "please send some data" });
     
-       let one=0
-       const validation = await loginJoi.validateAsync(data).then(()=>true).catch((err)=>{one=err.message; return null})
+       let error=0
+       const validation = await loginJoi.validateAsync(data).then(()=>true).catch((err)=>{error=err.message; return null})
    
-       if(!validation) return res.status(400).send({status :false,message:`${one}`})
+       if(!validation) return res.status(400).send({status :false,message:`${error}`})
 
        let email = data.email
        let password = data.password
@@ -56,7 +56,7 @@ const loginUser = async function (req, res) {
            return res.status(404).send({ status: false, message: "no user found with this credential" })
        } else {
            let token = jwt.sign({ userId: getUser._id },"groupseven",{expiresIn:"4h"})
-           res.setHeader("x-auth-key",token)
+           res.setHeader("x-api-key",token)
            return res.status(200).send({ status: true, message:"Success" ,data:token})
        }
 

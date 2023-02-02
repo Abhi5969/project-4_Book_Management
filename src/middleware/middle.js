@@ -4,7 +4,7 @@ const mongoose=require("mongoose")
 
 const authentication = async function (req, res, next) {
   try {
-    let token = req.headers["x-auth-key"];
+    let token = req.headers["x-api-key"];
     if (!token) return res.status(401).send({ message: "token not present" });
 
     jwt.verify(token, "groupseven", (err,decode) => {

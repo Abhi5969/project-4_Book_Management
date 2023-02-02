@@ -10,10 +10,10 @@ app.use(express.json());
 app.use(multer().any())
 app.use("/", route);
 
-mongoose.connect(process.env.MONGO_DB)
+mongoose.connect("mongodb+srv://Abhi_functionup:dBalIHuDvBLH2uZK@abhi1.m5k3ewv.mongodb.net/group7database")
     .then(() => console.log("Mongodb is connected."))
     .catch((err) => console.log(err));
 
-app.listen(3000, function () {
+app.listen(3000, function () { 
     console.log("Express app is running on port " + 3000);
 });
